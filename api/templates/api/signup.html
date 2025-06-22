@@ -184,7 +184,7 @@
         </form>
 
         <div id="error-message"></div>
-        <a href="http://127.0.0.1:8000/login/" class="login-link">Already have an account? Log in</a>
+        <a href="http://13.48.203.4:8000/login/" class="login-link">Already have an account? Log in</a>
     </div>
 
     <script>
@@ -210,7 +210,7 @@
             }
 
             // إرسال البيانات إلى API باستخدام Fetch
-            fetch('http://127.0.0.1:8000/signup/', {  // استبدل هذا الرابط بمسار الـ API الصحيح
+            fetch('http://13.48.203.4:8000/signup/', {  // استبدل هذا الرابط بمسار الـ API الصحيح
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -221,7 +221,7 @@
             .then(data => {
                 if (data.message === "User created successfully") {
                     alert("Account created successfully!");
-                    window.location.href = "http://127.0.0.1:8000/login/"; // تحويل المستخدم إلى صفحة تسجيل الدخول
+                    window.location.href = "http://13.48.203.4:8000/login/"; // تحويل المستخدم إلى صفحة تسجيل الدخول
                 } else {
                     alert("Something went wrong: " + JSON.stringify(data));
                 }
