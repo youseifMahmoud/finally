@@ -133,12 +133,12 @@
         // التأكد من وجود user_id
         if (!userId) {
             alert("User ID is missing. Please log in again.");
-            window.location.href = "http://127.0.0.1:8000/login/";
+            window.location.href = "http://13.48.203.4:8000/login/";
         }
 
         // تحديث رابط البروفايل
-        document.getElementById("profile-link").href = `http://127.0.0.1:8000/profileuser/?id=${userId}`;
-        document.getElementById("notification-icon").href = `http://127.0.0.1:8000/notification/?id=${userId}`;
+        document.getElementById("profile-link").href = `http://13.48.203.4:8000/profileuser/?id=${userId}`;
+        document.getElementById("notification-icon").href = `http://13.48.203.4:8000/notification/?id=${userId}`;
 
         // إعداد الخريطة
         var map = L.map('map').setView([30.0444, 31.2357], 13);
@@ -153,11 +153,11 @@
 
     if (!userId) {
         alert("User ID is missing. Please log in again.");
-        window.location.href = "http://127.0.0.1:8000/login/";
+        window.location.href = "http://13.48.203.4:8000/login/";
         return;
     }
 
-    fetch(`http://127.0.0.1:8000/get-last-location/?user_id=${userId}`) // إرسال user_id كـ query parameter
+    fetch(`http://13.48.203.4:8000/get-last-location/?user_id=${userId}`) // إرسال user_id كـ query parameter
         .then(response => {
             if (!response.ok) throw new Error(`خطأ في الشبكة: ${response.status}`);
             const contentType = response.headers.get('content-type');
@@ -245,7 +245,7 @@
 
             console.log("User ID from localStorage:", userId); // عرض ID في وحدة التحكم
 
-            fetch(`http://127.0.0.1:8000/get-battery-status/${userId}/`)
+            fetch(`http://13.48.203.4:8000/get-battery-status/${userId}/`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === "success") {
@@ -265,7 +265,7 @@
         });
 
         function fetchUnreadNotifications() {
-            fetch(`http://127.0.0.1:8000/unread_count/?id=${userId}`)
+            fetch(`http://13.48.203.4:8000/unread_count/?id=${userId}`)
                 .then(response => response.json())
                 .then(data => {
                     let count = data.unread_count;
@@ -289,7 +289,7 @@
                   const userId = localStorage.getItem("user_id");
                   if (!userId) return;
 
-                  const response = await fetch(`http://127.0.0.1:8000/get_notifications/?id=${userId}`);
+                  const response = await fetch(`http://13.48.203.4:8000/get_notifications/?id=${userId}`);
                   const data = await response.json();
         
                   if (data.notifications.length > 0) {
