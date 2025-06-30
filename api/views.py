@@ -424,34 +424,26 @@ def get_recent_places(request):
 
 def get_child_data(request, child_id):
     try:
-        # تحويل `child_id` إلى UUID
-        child_uuid = uuid.UUID(child_id)
+        # لا داعي لتحويل child_id، هو بالفعل UUID
+        child = Child.objects.filter(id=child_id).first()
 
-        # البحث عن الطفل في قاعدة البيانات
-        child = Child.objects.filter(id=child_uuid).first()
-
-        # التحقق من وجود الطفل
         if not child:
             return JsonResponse({"status": "error", "message": "Child not found."}, status=404)
 
-        # إرجاع بيانات الطفل
         return JsonResponse({
             "status": "success",
             "data": {
                 "id": str(child.id),
                 "name": child.name,
                 "age": child.age,
-                
                 "medical_info": child.medical_info,
-                "user_id": child.user.id,  # إرجاع الـ `user_id` المرتبط بالطفل
+                "user_id": str(child.user.id),
             }
         })
 
-    except ValueError:
-        return JsonResponse({"status": "error", "message": "Invalid UUID format."}, status=400)
     except Exception as e:
         return JsonResponse({"status": "error", "message": str(e)}, status=500)
-
+        
 # استقبال نسبة البطارية من الهاردوير وتخزينها
 @csrf_exempt
 def save_battery_status(request, child_id):
